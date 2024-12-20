@@ -1,0 +1,15 @@
+<!-- templates/newsletter/subscribe.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Subscribe to Newsletter</title>
+</head>
+<body>
+    <h2>Subscribe to Newsletter</h2>
+    <form method="post" action="{% url 'buttercheecks:subscribe' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Subscribe</button>
+    </form>
+</body>
+</html>

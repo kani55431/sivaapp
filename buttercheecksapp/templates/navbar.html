@@ -1,0 +1,220 @@
+{% load static %}
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+  
+    .container-fluid {
+      background-color: pink;
+      
+    }
+  
+    .site-navigation {
+      text-align: center;
+    }
+  
+    .site-menu {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  
+    .dropdown {
+      position: relative;
+      color: black;
+      padding: 10px;
+      cursor: pointer;
+      border-radius: 20px;
+    }
+  
+    .dropdown:hover .dropdown-content {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    
+    }
+  
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      min-width: 160px;
+      box-shadow: 0px 8px 10px 0px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      border-radius: 10px; /* Adjust the border-radius for rounding effect */
+    }
+  
+    .dropdown-content ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+  
+    .dropdown-content ul li {
+      padding: 10px;
+      transition: background-color 0.3s;
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+  
+    .dropdown:hover .dropdown-content ul li {
+      opacity: 1;
+      transform: translateY(0);
+      transition-delay: 0.2s;
+    }
+  
+    .dropdown-content ul li:hover {
+      background-color: #B7D1E3;
+    }
+  
+    .site-menu li a {
+      display: block;
+      color: black;
+      padding: 14px 16px;
+      text-decoration: none;
+      transition: background-color 0.3s;
+    }
+  
+ /* Reset margins and padding for ul and li */
+.site-menu ul,
+.site-menu li {
+    margin: 0;
+    padding: 0;
+}
+
+/* Adjust line-height */
+.site-menu li {
+    line-height: 1;
+}
+
+/* Your existing styles... */
+
+  .site-menu li a:hover {
+      background-color: #B7D1E3;
+      color: black;
+      border-radius: 20px;
+    }
+  
+    @keyframes scaleZ {
+      0% {
+        opacity: 0;
+        transform: scale(0);
+      }
+      80% {
+        transform: scale(1.07);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+  
+    .dropdown_menu-4 .dropdown_item-1,
+    .dropdown_menu-4 .dropdown_item-2,
+    .dropdown_menu-4 .dropdown_item-3,
+    .dropdown_menu-4 .dropdown_item-4,
+    .dropdown_menu-4 .dropdown_item-5 {
+      transform-origin: top center;
+      animation: scaleZ 300ms ease-in-out forwards;
+    }
+  
+    .dropdown_menu-4 .dropdown_item-1 {
+      animation-delay: 60ms;
+    }
+  
+    .dropdown_menu-4 .dropdown_item-2 {
+      animation-delay: 120ms;
+    }
+  
+    .dropdown_menu-4 .dropdown_item-3 {
+      animation-delay: 180ms;
+    }
+  
+    .dropdown_menu-4 .dropdown_item-4 {
+      animation-delay: 240ms;
+    }
+  
+    .dropdown_menu-4 .dropdown_item-5 {
+      animation-delay: 300ms;
+    }
+  </style>
+  <!-- this is the navbar updated in 01.12.2023-->
+  <nav class="site-navigation" role="navigation">
+    <div class="container">
+      <ul class="site-menu js-clone-nav d-none d-md-block">
+        <li class="dropdown">
+          <a  href="{% url 'buttercheecks:home'  %}" class="dropbtn" style="color: black;">HOME</a>      
+        </li>
+        <li class="dropdown">
+          <a href="{% url 'buttercheecks:swaddles-and-blankets' %}" class="dropbtn" style="color: black;">Swaddles & Blankets</a>
+          <div class="dropdown-content dropdown_menu-4">
+            <ul>
+              <li class="dropdown_item-2">
+                <a href="{% url 'buttercheecks:product_list_by_category' 'MUSLIN_SWADDLES' %}">Muslin Swaddles</a>
+               </li>
+              <li class="dropdown_item-3">
+                <a href="{% url 'buttercheecks:product_list_by_category' 'SNUG_SWADDLES' %}">Snug Swaddles</a>
+               </li>
+              <li class="dropdown_item-4">
+                <a href="{% url 'buttercheecks:product_list_by_category' 'WRAP_SWADDLES' %}">Wrap Swaddles</a>
+                 </li>
+              <li class="dropdown_item-5">
+                <a href="{% url 'buttercheecks:product_list_by_category' 'BABY_BLANKETS' %}">Blankets</a>
+              </li> 
+            </ul>
+          </div>
+        </li>
+
+        <li class="dropdown">
+          <a href="{% url 'buttercheecks:clothings' %}" class="dropbtn" style="color: black;">Clothings </a>
+          <div class="dropdown-content dropdown_menu-4">
+            <ul>
+              <li class="dropdown_item-1">
+                <a href="{% url 'buttercheecks:product_list_by_category' 'MUSLIN_JABLAS' %}">Muslin Jablas</a>
+              </li>                 
+              <li class="dropdown_item-2">
+                <a href="{% url 'buttercheecks:product_list_by_category' 'MUSLIN_ROMBERS' %}">Muslin Rombers</a>
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li class="dropdown">
+          <a href="{% url 'buttercheecks:nursing-supplies' %}" class="dropbtn" style="color: black;">Nursing  Supplies </a>
+          <div class="dropdown-content dropdown_menu-4">
+            <ul>
+              <li class="dropdown_item-1"> <a href="{% url 'buttercheecks:product_list_by_category' 'BIB_CLOTH_SETS' %}"> Bib Cloth Sets
+              </a>
+              </li>
+              <li class="dropdown_item-2"> <a href="{% url 'buttercheecks:product_list_by_category' 'BURP_CLOTH_SETS' %}"> Burp Cloth Sets</a>
+              </li>
+              <li class="dropdown_item-2">
+                 <a href="{% url 'buttercheecks:product_list_by_category' 'NAPKINS' %}">Napkins</a>
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li class="dropdown">
+          <a href="{% url 'buttercheecks:baby-beddings' %}" class="dropbtn" style="color: black;">Baby Beddings </a>
+          <div class="dropdown-content dropdown_menu-4">
+            <ul>
+              <li class="dropdown_item-1"><a href="{% url 'buttercheecks:product_list_by_category' 'BABY_BEDDINGS' %}" style="color: black;"> Bedding Sets</a>
+              </li>
+              <li class="dropdown_item-2"><a href="{% url 'buttercheecks:product_list_by_category' 'FEEDING_PILLOWS' %}"> Feeding pillows</a>   
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li class="dropdown">
+          <a href="{% url 'buttercheecks:about' %}" style="color: black;">About</a>
+        </li>
+      </ul>
+    </div>
+  </nav>

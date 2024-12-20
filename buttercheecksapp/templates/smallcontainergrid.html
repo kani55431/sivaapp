@@ -1,0 +1,167 @@
+
+{% load static %}
+<div class="slide2">
+<div class="container-small-grid">
+    <div class="box">
+      <div class="imgBx">
+        <img src="{% static 'images/smallcontainerimages (4).jpg' %}">
+      </div>
+      <div class="content">
+        <div>
+          <h2>Baby Swaddles</h2>
+          <p>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="box">
+      <div class="imgBx">
+        <img src="{% static 'images/smallcontainerimages (2).jpg' %}">
+      </div>
+      <div class="content">
+        <div>
+          <h2>BABY Clothings</h2>
+          <p>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="box">
+      <div class="imgBx">
+        <img src="{% static 'images/smallcontainerimages (3).jpg' %}">
+      </div>
+      <div class="content">
+        <div>
+          <h2>Nursing Supplies </h2>
+          <p>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="box">
+      <div class="imgBx">
+        <img src="{% static 'images/smallcontainerimages (1).jpg' %}">
+      </div>
+      <div class="content">
+        <div>
+          <h2>Baby Beddings</h2>
+          <p>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  <style>
+
+ 
+    .container-small-grid {
+        position: relative;
+        width: 100%; /* Use a percentage for responsiveness */
+        max-width: 1160px; /* Limit the maximum width */
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        transform-style: preserve-3d;
+        perspective: 500px;
+        margin: auto;
+      }
+      
+      .container-small-grid .box {
+        position: relative;
+        width: calc(25% - 20px); /* Adjust the width and include some margin */
+        height: 275px;
+        background: #000;
+        transition: 0.5s;
+        transform-style: preserve-3d;
+        overflow: hidden;
+        margin: 10px; /* Add margin for spacing */
+      }
+      
+      /* Rest of your CSS remains unchanged */
+      
+      @media only screen and (max-width: 768px) {
+        /* Responsive styles for smaller screens */
+        .container-small-grid .box {
+          width: calc(50% - 20px); /* Adjust width for two columns on smaller screens */
+        }
+      }
+      
+      .container-small-grid:hover .box {
+        transform: rotateY(25deg);
+      }
+      .container-small-grid .box:hover ~ .box {
+        transform: rotateY(-25deg);
+      }
+      .container-small-grid .box:hover {
+        transform: rotateY(0deg) scale(1.25);
+        z-index: 1;
+        box-shadow: 0 25px 40px rgba(0,0,0,0.5);
+      }
+      .container-small-grid .box .imgBx {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+      .container-small-grid .box .imgBx:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(180deg,#e1e7ec, #96bcdf);
+        z-index: 1;
+        opacity: 0;
+        transition: 0.5s;
+        mix-blend-mode: multiply;
+      }
+      .container-small-grid .box:hover .imgBx:before {
+        opacity: 1;
+      }
+      .container-small-grid .box .imgBx img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .container-small-grid .box .content {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        display: flex;
+        padding: 20px;
+        align-items: flex-end;
+        box-sizing: border-box;
+      }
+      .container-small-grid .box .content h2 {
+        color: #fff;
+        transition: 0.5s;
+        text-transform: uppercase;
+        margin-bottom: 5px;
+        font-size: 20px;
+        transform: translateY(200px);
+        transition-delay: 0.3s;
+      }
+      .container-small-grid .box:hover .content h2 {
+        transform: translateY(0px);
+      }
+      .container-small-grid .box .content p {
+        color: #fff;
+        transition: 0.5s;
+        font-size: 14px;
+        transform: translateY(200px);
+        transition-delay: 0.4s;
+      }
+      .container-small-grid .box:hover .content p {
+        transform: translateY(0px);
+      }
+  </style>
+

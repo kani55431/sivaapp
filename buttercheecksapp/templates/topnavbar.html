@@ -1,0 +1,68 @@
+<!-- Add this in the head of your HTML document -->
+<head>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-T8TIofMlYF78efjt3YOp6zWF7V1tn7I6h2mJP3KuF9LPrNH1e1dYVBfMEW5I1j" crossorigin="anonymous">
+
+    <!-- Optional: Include jQuery and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js" integrity="sha384-EKZHAEdb3U4IZdfGN1hEi6Ir5dyh5JYo04Kb2OTb3u7fmX7YqzDpeVS6auT3Z2Q" crossorigin="anonymous"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+WyFSLA7/pxcdKd5b9SYRVZu+UCAUqSzZh" crossorigin="anonymous"></script>
+</head>
+
+<div class="col-6 col-md-4 order-3 order-md-3 text-right">
+    <div class="site-top-icons">
+        <ul class="navbar-nav" style="display: flex; align-items: center; list-style: none; padding: 0;">
+
+            {% if user.is_authenticated %}
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Profile
+                </a>
+                
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{% url 'buttercheecks:orders' %}">My Orders & Returns</a>
+                    <a class="dropdown-item" href="{% url 'buttercheecks:cart' %}">
+                        Cart <span class="badge badge-secondary" style="position: relative; top: -6px; margin-left: 3px;">{{ cart_count }}</span>
+                    </a>
+                    <a class="dropdown-item" href="{% url 'buttercheecks:logout' %}">Logout</a>
+                </div>
+            </li>
+
+            {% else %}
+
+            <li class="nav-item" style="margin-right: 10px;">
+                <a class="nav-link" href="{% url 'buttercheecks:signup_login' %}">
+                    Sign Up / Login
+                </a>
+            </li>
+
+            {% endif %}
+
+            <li class="nav-item">
+                <a class="nav-link site-menu-toggle js-menu-toggle" href="#"></a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var dropdownToggle = document.querySelector('.dropdown-toggle');
+        var dropdownMenu = document.querySelector('.dropdown-menu');
+
+        dropdownToggle.addEventListener('click', function () {
+            dropdownMenu.classList.toggle('show');
+        });
+
+        window.onclick = function (event) {
+            if (!event.target.matches('.dropdown-toggle')) {
+                if (dropdownMenu.classList.contains('show')) {
+                    dropdownMenu.classList.remove('show');
+                }
+            }
+        };
+    });
+</script>

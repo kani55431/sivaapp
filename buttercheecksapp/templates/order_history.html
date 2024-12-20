@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order History</title>
+</head>
+<body>
+    <h1>Order History</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Date</th>
+                <th>Total Amount</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+            <tr>
+                <td>{{ order.id }}</td>
+                <td>{{ order.created_at }}</td>
+                <td>₹{{ order.total_amount }}</td>
+                <td>{{ order.status }}</td>
+                <td>
+                    <a href="{% url 'buttercheecks:order_details' order.id %}">View Details</a>
+                </td>
+            </tr>
+            <tr class="hidden-details">
+                <td colspan="5">
+                    <h1>Order Details</h1>
+                    
+                    <h2>Order Information</h2>
+                    <p><strong>Order ID:</strong> {{ order.id }}</p>
+                    <p><strong>User:</strong> {{ order.user.username }}</p>
+                    <p><strong>Shipping Address:</strong> {{ order.shipping_address }}</p>
+                    <p><strong>Billing Address:</strong> {{ order.billing_address }}</p>
+                    <p><strong>Payment Method:</strong> {{ order.payment_method }}</p>
+                    <p><strong>Total Amount:</strong> ₹{{ order.total_amount }}</p>
+                    <p><strong>Payment Status:</strong> {% if order.payment_status %}Paid{% else %}Pending{% endif %}</p>
+                    <p><strong>Status:</strong> {{ order.status }}</p>
+                    <p><strong>Created At:</strong> {{ order.created_at }}</p>
+                    <p><strong>Updated At:</strong> {{ order.updated_at }}</p>
+    
+                    <h2>Checkout Information</h2>
+                    <p><strong>Country:</strong> {{ checkout_data.country }}</p>
+                    <p><strong>First Name:</strong> {{ checkout_data.first_name }}</p>
+                    <p><strong>Last Name:</strong> {{ checkout_data.last_name }}</p>
+                    <p><strong>Company Name:</strong> {{ checkout_data.company_name }}</p>
+                    <p><strong>Address:</strong> {{ checkout_data.address }}</p>
+                    <p><strong>Apartment/Suite:</strong> {{ checkout_data.apartment_suite }}</p>
+                    <p><strong>State/Country:</strong> {{ checkout_data.state_country }}</p>
+                    <p><strong>Postal/Zip:</strong> {{ checkout_data.postal_zip }}</p>
+                    <p><strong>Email:</strong> {{ checkout_data.email }}</p>
+                    <p><strong>Phone:</strong> {{ checkout_data.phone }}</p>
+                    <p><strong>Order Notes:</strong> {{ checkout_data.order_notes }}</p>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <!-- Add any additional formatting or styling as needed -->
+
+</body>
+</html>
+
