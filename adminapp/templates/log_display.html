@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log Details</title>
+    <style>
+        /* Add your custom CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .log-entry {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        .timestamp {
+            font-weight: bold;
+            color: #333;
+        }
+        .level {
+            font-weight: bold;
+            color: #007bff;
+        }
+        .message {
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Log Details</h1>
+    <div id="log-entries">
+        {% for log_entry in log_entries %}
+            <div class="log-entry">
+                <div class="timestamp">{{ log_entry.timestamp }}</div>
+                <div class="level">{{ log_entry.level }}</div>
+                <div class="message">{{ log_entry.message }}</div>
+            </div>
+        {% empty %}
+            <p>No log entries available.</p>
+        {% endfor %}
+    </div>
+</body>
+</html>

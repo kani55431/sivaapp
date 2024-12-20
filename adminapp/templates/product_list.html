@@ -1,0 +1,295 @@
+{% load custom_filters %}
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+  <title>Little Bubs</title>
+
+  <!-- General CSS Files -->
+  <link rel="stylesheet" href="{% static 'assets/modules/bootstrap/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/modules/fontawesome/css/all.min.css' %}">
+
+  <!-- CSS Libraries -->
+  <link rel="stylesheet" href="{% static 'assets/modules/jqvmap/dist/jqvmap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/modules/summernote/summernote-bs4.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/modules/owlcarousel2/dist/assets/owl.carousel.min.css' %}">
+  <link rel="stylesheet" href="{% static 'assets/modules/owlcarousel2/dist/assets/owl.theme.default.min.css' %}">
+
+  <!-- Template CSS -->
+  <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/components.css' %}">
+<!-- Start GA -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-94034622-3');
+</script>
+<!-- /END GA --></head>
+
+<body>
+  <div id="app">
+    <div class="main-wrapper main-wrapper-1">
+      <div class="navbar-bg"></div>
+      <nav class="navbar navbar-expand-lg main-navbar">
+        <form class="form-inline mr-auto" method="GET">
+          <div class="search-element">
+              <input class="form-control" type="search" name="q" placeholder="Search" aria-label="Search" data-width="250" value="{{ request.GET.q }}">
+              <button class="btn" type="submit"><i class="fas fa-search"></i></button>
+              <div class="search-backdrop"></div>
+          </div>
+      </form>
+        <ul class="navbar-nav navbar-right">
+          <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" class="nav-link nav-link-lg message-toggle beep"><i class="far fa-envelope"></i></a>
+            <div class="dropdown-menu dropdown-list dropdown-menu-right">
+             
+             
+              <div class="dropdown-footer text-center">
+                
+              </div>
+            </div>
+          </li>
+          <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg beep"><i class="far fa-bell"></i></a>
+            <div class="dropdown-menu dropdown-list dropdown-menu-right">
+              <div class="dropdown-header">
+              </div>
+             
+            </div>
+          </li>
+          <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+            <img alt="image" src="{% static 'assets/img/avatar/avatar-1.png' %}" class="rounded-circle mr-1">
+            <div class="d-sm-none d-lg-inline-block">Hi, {{user.username}}</div></a>
+            <div class="dropdown-menu dropdown-menu-right">
+              <div class="dropdown-title"></div>
+             
+             
+              <div class="dropdown-divider"></div>
+              <a href="{% url 'adminapp:logout'%}" class="dropdown-item has-icon text-danger">
+                <i class="fas fa-sign-out-alt"></i> Logout
+              </a>
+            </div>
+          </li>
+        </ul>
+      </nav>
+      <div class="main-sidebar sidebar-style-2">
+        <aside id="sidebar-wrapper">
+            <div class="sidebar-brand">
+              <a href="index.html">AKP TEX</a>
+            </div>
+            <div class="sidebar-brand sidebar-brand-sm">
+              <a href="index.html">AKP</a>
+            </div>
+          <ul class="sidebar-menu">
+            <li class="menu-header">Dashboard</li>
+            <li class="dropdown active">
+              <a href="{% url 'adminapp:littlebubsdashboard' %}"class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Dashboard</span></a>
+              <ul class="dropdown-menu">
+                <li><a class="nav-link" >General Dashboard</a></li>
+                <li class=active><a class="nav-link" href="{% url 'adminapp:littlebubsdashboard' %}">little Bubs Dashboard</a></li>
+              </ul>
+            </li>
+            <li class="menu-header">ORDERS</li>
+            <li class="dropdown">
+              <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Orders </span></a>
+              <ul class="dropdown-menu">
+                <li><a class="nav-link" href="{% url 'adminapp:order_list' %}">Total Orders </a></li>
+                <li><a class="nav-link" href="{% url 'adminapp:return_list' %}">Return Orders</a></li>
+                
+              </ul>
+            </li>
+           
+            <li class="dropdown">
+              <a href="#" class="nav-link has-dropdown"><i class="fas fa-th"></i> <span>Products</span></a>
+              <ul class="dropdown-menu">
+                <li><a class="nav-link"  href="{% url 'adminapp:add_product' %}">Add Products </a></li>
+                <li><a class="nav-link" href="{% url 'adminapp:product_list' %}">Total Products </a></li>
+                <li><a class="nav-link" href="{% url 'adminapp:products_images' %}">Product Images</a></li>
+                <li><a class="nav-link"  href="{% url 'adminapp:add_size' %}"> Add sizes For product</a></li>
+                
+                <li><a class="nav-link" href="{% url 'adminapp:add_size_quantity' %}">Add Size Quantity</a></li>
+         
+              </ul>
+            </li>
+            <li class="menu-header">Users</li>
+            <li class="dropdown">
+              <a href="#" class="nav-link has-dropdown"><i class="fas fa-th-large"></i> <span>Total Users </span></a>
+              <ul class="dropdown-menu">
+                <li><a class="nav-link"  href="{% url 'adminapp:user_address_list' %}" >User Address details </a></li>               
+            </li>
+      </div>
+   <!-- Main Content -->
+   <div class="main-content">
+    <section class="section">
+      <div class="section-header">
+        <h1>Product List </h1>
+        <div class="section-header-breadcrumb">
+          <div class="breadcrumb-item active"><a href="{% url 'adminapp:littlebubsdashboard' %}">Dashboard</a></div>
+              
+          
+          <div class="breadcrumb-item">Product List</div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h4>All Products</h4>
+              <div class="card-header-form">
+                <form method="get">
+                  <div class="input-group">
+                   <input  class="form-control" placeholder="Search" type="text" id="search" name="search" placeholder="Search Products" value="{{ search_query }}">
+                    <div class="input-group-btn">
+                      <button class="btn btn-primary"><i class="fas fa-search"></i></button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>  
+       
+            <div class="card-body p-0">
+              <div class="table-responsive">
+                <table class="table table-striped">
+                  <tr>
+                    <th>Product Name</th>
+                    <th>Color</th>
+                    <th>Price</th>
+                    <th>Price 2</th>
+                   
+                    <th>Category</th>
+                    <th>Availability</th>
+                   
+                   
+                    
+                    <th>Image 1</th>
+                    <th>Image 2</th>
+                    <th>Image 3</th>
+                    <th>Image 4</th>
+                    <th>Image 5</th>
+                    <th>Created At</th>
+                    <th>Updated At</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                <tr>
+                    <td>{{ product.product_name }}</td>
+                    <td>{{ product.color }}</td>
+                    <td>{{ product.price }}</td>
+                    <td>{{ product.price2 }}</td>
+                    
+                    <td>{{ product.category }}</td>
+                    <td>{{ product.availability }}</td>
+                    
+                    <td><img src="{{ product.image1.url }}" alt="{{ product.product_name }}" width="100"></td>
+                    <td><img src="{{ product.image2.url }}" alt="{{ product.product_name }}" width="100"></td>
+                    <td><img src="{{ product.image3.url }}" alt="{{ product.product_name }}" width="100"></td>
+                    <td><img src="{{ product.image4.url }}" alt="{{ product.product_name }}" width="100"></td>
+                    <td><img src="{{ product.image5.url }}" alt="{{ product.product_name }}" width="100"></td>
+                    <td>{{ product.created_at }}</td>
+                    <td>{{ product.updated_at }}</td>
+                    <td>
+                      <a href="{% url 'adminapp:edit_product' product.id %}">Edit</a>
+                      <a href="{% url 'adminapp:delete_product' product.id %}">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+      
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+     
+  
+      <!-- Modal for displaying product details -->
+      <div id="productModal" class="modal">
+          <div class="modal-content">
+              <span class="close" id="closeModal">&times;</span>
+              <h2>Product Details</h2>
+              <div id="productDetails">
+                  <!-- Product details will be displayed here -->
+              </div>
+          </div>
+      </div>
+  
+      <script>
+          // Get the modal and close button
+          const modal = document.getElementById('productModal');
+          const closeModal = document.getElementById('closeModal');
+  
+          // Attach click event listeners to each product row
+          const productRows = document.querySelectorAll('.product-row');
+          productRows.forEach(row => {
+              row.addEventListener('click', () => {
+                  // Get the product ID from the data attribute
+                  const productId = row.getAttribute('data-product-id');
+                  
+                  // Make an AJAX request to fetch the full product details from the server
+                  fetch(`/get-product-details/${productId}/`)
+                      .then(response => response.json())
+                      .then(data => {
+                          // Update the modal content with the product details
+                          const productDetails = document.getElementById('productDetails');
+                          productDetails.innerHTML = data.html;
+                      });
+  
+                  // Show the modal
+                  modal.style.display = 'block';
+              });
+          });
+  
+          // Close the modal when the close button is clicked
+          closeModal.addEventListener('click', () => {
+              modal.style.display = 'none';
+          });
+  
+          // Close the modal when clicking outside of it
+          window.addEventListener('click', event => {
+              if (event.target == modal) {
+                  modal.style.display = 'none';
+              }
+          });
+      </script> 
+<footer class="main-footer">
+  <div class="footer-left">
+    Copyright &copy; 2023 <div class="bullet"></div>AKP  <a href="#"> </a>
+  </div>
+  <div class="footer-right">
+    
+  </div>
+</footer>
+</div>
+</div>
+
+<!-- General JS Scripts -->
+<script src="{% static 'assets/modules/jquery.min.js' %}"></script>
+<script src="{% static 'assets/modules/popper.js' %}"></script>
+<script src="{% static 'assets/modules/tooltip.js' %}"></script>
+<script src="{% static 'assets/modules/bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'assets/modules/nicescroll/jquery.nicescroll.min.js' %}"></script>
+<script src="{% static 'assets/modules/moment.min.js' %}"></script>
+<script src="{% static 'assets/js/stisla.js' %}"></script>
+
+<!-- JS Libraies -->
+<script src="{% static 'assets/modules/jquery.sparkline.min.js' %}"></script>
+<script src="{% static 'assets/modules/chart.min.js' %}"></script>
+<script src="{% static 'assets/modules/owlcarousel2/dist/owl.carousel.min.js' %}"></script>
+<script src="{% static 'assets/modules/summernote/summernote-bs4.js' %}"></script>
+<script src="{% static 'assets/modules/chocolat/dist/js/jquery.chocolat.min.js' %}"></script>
+
+<!-- Page Specific JS File -->
+<script src="{% static 'assets/js/page/index.js' %}"></script>
+
+<!-- Template JS File -->
+<script src="{% static 'assets/js/scripts.js' %}"></script>
+<script src="{% static 'assets/js/custom.js' %}"></script>
+</body>
+</html>
